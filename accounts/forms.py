@@ -42,7 +42,7 @@ class AdminUserCreationForm(forms.ModelForm):
 
 	class Meta:
 		model = User
-		fields = ('email',)
+		fields = ('username', 'email')
 
 	def clean_username(self):
 		username = self.cleaned_data.get('username')

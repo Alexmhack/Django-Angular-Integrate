@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import (
 	BaseUserManager, AbstractBaseUser
 )
+from django.utils import timezone
 
 class UserManager(BaseUserManager):
 	def create_user(self, username, email, password=None):
@@ -59,15 +60,19 @@ class User(AbstractBaseUser):
 		unique=True
 	)
 
-	active = models.BooleanField(default=True)
+	date_joined = models.DateTimeField(default=timezone.now)
+	date_updated = models.DateTimeField()
+
+	active = models.BooleanField(default=False)
 	staff = models.BooleanField(default=False)  # <- admin user, not super user
 	admin = models.BooleanField(default=False)  # <- super user
 
 	# notice the absence of password field
 	# that is built in
 
-	USERNAME_FIELD = 'email'
-	REQUIRED_FIELDS = ['username']  # <- email and password are required by default
+	EMAIL_FIELD = 'email'
+	USERNAME_FIELD = 'username'
+	REQUIRED_FIELDS = ['email']  # <- email and password are required by default
 
 	def get_full_name(self):
 		return str(self.email)
@@ -97,3 +102,8 @@ class User(AbstractBaseUser):
 
 	# hook the user manager to objects
 	objects = UserManager()
+
+	def save(self):
+		self.date_updated = timezone.now()
+		self.last_login = timezone.now()
+		return super().save()
