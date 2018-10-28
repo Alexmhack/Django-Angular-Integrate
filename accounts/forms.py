@@ -9,7 +9,14 @@ class RegisterForm(forms.ModelForm):
 
 	class Meta:
 		model = User
-		fields = ('email',)
+		fields = ('username', 'email')
+
+	def clean_username(self):
+		username = self.cleaned_data.get('username')
+		qs = User.objects.filter(username=username)
+		if qs.exists():
+			raise ValidationError('username already exists')
+		return username
 
 	def clean_email(self):
 		"""check if the email already exists"""
@@ -36,6 +43,13 @@ class AdminUserCreationForm(forms.ModelForm):
 	class Meta:
 		model = User
 		fields = ('email',)
+
+	def clean_username(self):
+		username = self.cleaned_data.get('username')
+		qs = User.objects.filter(username=username)
+		if qs.exists():
+			raise ValidationError('username already exists')
+		return username
 
 	def clean_email(self):
 		"""check if the email already exists"""
@@ -68,7 +82,7 @@ class UserAdminChangeForm(forms.ModelForm):
 
 	class Meta:
 		model = User
-		fields = ('email', 'password', 'active', 'admin')
+		fields = ('username', 'email', 'password', 'active', 'admin')
 
 	def clean_password(self):
 		# Regardless of what the user provides, return the initial value.

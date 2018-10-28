@@ -4,14 +4,18 @@ from django.contrib.auth.models import (
 )
 
 class UserManager(BaseUserManager):
-	def create_user(self, email, password=None):
+	def create_user(self, username, email, password=None):
 		"""
 		creates a user with given email and password
 		"""
+		if not username:
+			raise ValueError('user must have a username')
+
 		if not email:
 			raise ValueError('user must have a email address')
 
 		user = self.model(
+			username=self.normalize_email(username),
 			email=self.normalize_email(email),
 		)
 
@@ -19,11 +23,12 @@ class UserManager(BaseUserManager):
 		user.save(self._db)
 		return user
 
-	def create_staffuser(self, email, password):
+	def create_staffuser(self, username, email, password):
 		"""
 		creates a user with staff permissions
 		"""
 		user = self.create_user(
+			username=username,
 			email=email,
 			password=password
 		)
@@ -31,11 +36,12 @@ class UserManager(BaseUserManager):
 		user.save(using=self._db)
 		return user
 
-	def create_superuser(self, email, password):
+	def create_superuser(self, username, email, password):
 		"""
 		creates a superuser with email and password
 		"""
 		user = self.create_user(
+			username=username,
 			email=email,
 			password=password
 		)
@@ -46,6 +52,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+	username = models.CharField(max_length=50, unique=True)
 	email = models.EmailField(
 		verbose_name='Email address',
 		max_length=255,
@@ -60,7 +67,7 @@ class User(AbstractBaseUser):
 	# that is built in
 
 	USERNAME_FIELD = 'email'
-	REQUIRED_FIELDS = []  # <- email and password are required by default
+	REQUIRED_FIELDS = ['username']  # <- email and password are required by default
 
 	def get_full_name(self):
 		return str(self.email)
