@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     # django apps
     'blogs',
+    'accounts',
     
     # django packages
     'rest_framework',
