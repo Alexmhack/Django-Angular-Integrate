@@ -6,6 +6,6 @@ app_name = 'blogs-router'
 
 router = routers.SimpleRouter()
 
-router.register('', BlogViewSet, basename='list')
+router.register('', BlogViewSet)
 
 urlpatterns = router.urls
