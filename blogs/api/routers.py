@@ -1,10 +1,9 @@
 from rest_framework import routers
 
-from .views import BlogListCreateAPIView, BlogListAPIView
+from .viewsets import BlogViewSet
 
 router = routers.SimpleRouter()
 
-router.register('', BlogListCreateAPIView, basename='list-create')
-router.register('list/', BlogListAPIView, basename='list')
+router.register('', BlogViewSet, basename='list')
 
 urlpatterns = router.urls
