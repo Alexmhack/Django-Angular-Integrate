@@ -4,7 +4,7 @@ from .views import BlogListCreateAPIView, BlogListAPIView
 
 router = routers.SimpleRouter()
 
-router.register('', BlogListCreateAPIView)
-router.register('list/', BlogListAPIView)
+router.register('', BlogListCreateAPIView, basename='list-create')
+router.register('list/', BlogListAPIView, basename='list')
 
 urlpatterns = router.urls
