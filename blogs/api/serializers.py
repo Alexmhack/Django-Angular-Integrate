@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from blogs.models import Blog
-from accounts.api.models import AccountModelSerializer
+from accounts.api.serializers import AccountModelSerializer
 
 class BlogModelSerializer(serializers.ModelSerializer):
 	owner = AccountModelSerializer(read_only=True)
@@ -9,6 +9,7 @@ class BlogModelSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Blog
 		fields = ('owner', 'title', 'content', 'timestamp', 'updated')
+		read_only_fields = ('user', 'id')
 
 	def get_updated(self, obj):
 		if obj.timestamp == obj.updated:
