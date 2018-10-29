@@ -1,6 +1,7 @@
 from rest_framework import generics
 from rest_framework import mixins
 from rest_framework import permissions
+from rest_framework.decorators import action
 
 from blogs.models import Blog
 from .serializers import BlogModelSerializer
@@ -25,6 +26,7 @@ class BlogListCreateAPIView(mixins.CreateModelMixin, generics.ListAPIView):
 class BlogListAPIView(generics.ListAPIView):
 	serializer_class = BlogModelSerializer
 
+	@action(methods=['get'], detail=True)
 	def get_queryset(self):
 		qs = Blog.objects.all().order_by("-timestamp")
 		query = self.request.GET.get("q", None)
