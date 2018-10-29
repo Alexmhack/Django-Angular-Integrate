@@ -12,6 +12,7 @@ python-decouple = "*"
 djangorestframework-jwt = "*"
 gunicorn = "*"
 django-heroku = "*"
+whitenoise = "*"
 
 [dev-packages]
 
