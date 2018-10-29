@@ -6,9 +6,13 @@ from blogs.models import Blog
 from .serializers import BlogModelSerializer
 
 class BlogListCreateAPIView(mixins.CreateModelMixin, generics.ListAPIView):
-	queryset = Blog.objects.all()
 	serializer_class = BlogModelSerializer
 	permission_classes = (permissions.IsAuthenticated,)
+
+	def get_queryset(self):
+		qs = Blog.objects.all()
+		queryset = qs.filter(owner=self.request.user)
+		return queryset
 
 	def perform_create(self, serializer):
 		serializer.save(owner=self.request.user)
