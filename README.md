@@ -37,3 +37,5 @@ Integrating Django and Angular by creating REST API and running both the servers
 	```
 	ng serve --open
 	```
+
+### Detialed Instructions On Project Coming Soon...
