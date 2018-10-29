@@ -8,7 +8,7 @@ class BlogModelSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Blog
-		fields = ('owner', 'title', 'content', 'timestamp', 'updated')
+		fields = ('id', 'owner', 'title', 'content', 'timestamp', 'updated')
 		read_only_fields = ('user', 'id')
 
 	def get_updated(self, obj):

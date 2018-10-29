@@ -8,6 +8,6 @@ urlpatterns = [
 
 # blogs app urls
 urlpatterns += [
-    path('', RedirectView.as_view(url='/blogs/'), name='blogs-redirect')
+    path('', RedirectView.as_view(url='/blogs/'), name='blogs-redirect'),
     path('blogs/', include('blogs.urls', namespace='blogs')),
 ]
