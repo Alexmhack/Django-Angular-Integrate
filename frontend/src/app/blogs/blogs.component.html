@@ -1,3 +1,8 @@
-<p>
-  blogs works!
-</p>
+<ul>
+	<li *ngFor="let blog of blogs">
+		{{ blog.owner.username }}<br>
+		{{ blog.title }}<br>
+		{{ blog.content }}<br>
+		{{ blog.timestamp }}<br>
+	</li><br><br>
+</ul>
