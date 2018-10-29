@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import dj_database_url
 import django_heroku
 
 from decouple import config
@@ -163,5 +164,8 @@ CORS_ORIGIN_WHITELIST = (
 
 
 # Activate Django-Heroku.
+# Heroku: update database configuration from $DATABASE_URL
 
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
