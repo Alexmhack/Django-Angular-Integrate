@@ -99,6 +99,3 @@ class User(AbstractBaseUser):
 
 	# hook the user manager to objects
 	objects = UserManager()
-
-	def save(self):
-		return super().save()
