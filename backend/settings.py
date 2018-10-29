@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import django_heroku
 
 from decouple import config
 
@@ -153,3 +154,8 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_WHITELIST = (
     'localhost:4200',
 )
+
+
+# Activate Django-Heroku.
+
+django_heroku.settings(locals())
