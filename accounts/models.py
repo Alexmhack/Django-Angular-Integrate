@@ -60,9 +60,6 @@ class User(AbstractBaseUser):
 		unique=True
 	)
 
-	date_joined = models.DateTimeField(default=timezone.now)
-	date_updated = models.DateTimeField()
-
 	active = models.BooleanField(default=False)
 	staff = models.BooleanField(default=False)  # <- admin user, not super user
 	admin = models.BooleanField(default=False)  # <- super user
@@ -104,6 +101,4 @@ class User(AbstractBaseUser):
 	objects = UserManager()
 
 	def save(self):
-		self.date_updated = timezone.now()
-		self.last_login = timezone.now()
 		return super().save()
