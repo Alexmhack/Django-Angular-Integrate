@@ -13,6 +13,7 @@ export class BlogsComponent implements OnInit {
   constructor(private blogService: BlogService) { }
 
   blogs: Blog[] = [];
+  blog: Blog;
 
   ngOnInit() {
   	this.getBlogs();
@@ -21,6 +22,11 @@ export class BlogsComponent implements OnInit {
   getBlogs(): void {
   	this.blogService.getBlogs()
   		.subscribe(blogs => this.blogs = blogs);
+  }
+
+  getBlog(id: number): void {
+    this.blogService.getBlog(id)
+      .subscribe(blog => this.blog = blog);
   }
 
 }

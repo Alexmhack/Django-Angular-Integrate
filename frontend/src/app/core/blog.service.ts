@@ -23,6 +23,16 @@ export class BlogService {
   		);
   }
 
+  getBlog(id: number): Observable<Blog> {
+    const url = this.blogsUrl + `${id}/detail/`;
+
+    return this.http.get<Blog>(url)
+      .pipe(
+          catchError(this.handleError<Blog>('getBlogs ID=${id}'))
+      );
+  }
+
+
  /**
  * Handle Http operation that failed.
  * Let the app continue.
