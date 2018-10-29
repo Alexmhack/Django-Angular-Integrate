@@ -5,13 +5,17 @@ from rest_framework import permissions
 from blogs.models import Blog
 from .serializers import BlogModelSerializer
 
-class BlogCRAPIVIew(generics.ListAPIView, mixins.CreateModelMixin):
-	queryset = Blog
-	serializer_class = BlogModelSerializer()
+class BlogListCreateAPIView(mixins.CreateModelMixin, generics.ListAPIView):
+	queryset = Blog.objects.all()
+	serializer_class = BlogModelSerializer
 	permission_classes = (permissions.IsAuthenticated,)
 
 	def perform_create(self, serializer):
 		serializer.save(owner=self.request.user)
+
+	# adds the post method in allowed methods list
+	def post(self, request, *args, **kwargs):
+		return self.create(request, *args, **kwargs)
 
 
 class BlogListAPIView(generics.ListAPIView):
