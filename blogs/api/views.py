@@ -26,7 +26,6 @@ class BlogListCreateAPIView(mixins.CreateModelMixin, generics.ListAPIView):
 class BlogListAPIView(generics.ListAPIView):
 	serializer_class = BlogModelSerializer
 
-	@action(methods=['get'], detail=True)
 	def get_queryset(self):
 		qs = Blog.objects.all().order_by("-timestamp")
 		query = self.request.GET.get("q", None)
@@ -36,3 +35,7 @@ class BlogListAPIView(generics.ListAPIView):
 				Q(user__username__icontains=query)
 			)
 		return qs
+
+	@classmethod
+	def get_extra_actions(cls):
+		return []
