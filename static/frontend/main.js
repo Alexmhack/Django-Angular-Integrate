@@ -346,7 +346,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var BlogService = /** @class */ (function () {
     function BlogService(http) {
         this.http = http;
-        this.blogsUrl = 'http://127.0.0.1:8000/blogs/api/';
+        this.blogsUrl = 'https://evening-falls-50549.herokuapp.com/blogs/api/';
     }
     BlogService.prototype.getBlogs = function () {
         var url = this.blogsUrl + 'list/';

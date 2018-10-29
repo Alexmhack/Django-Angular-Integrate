@@ -12,7 +12,7 @@ export class BlogService {
 
   constructor(private http: HttpClient) { }
 
-  private blogsUrl = 'http://127.0.0.1:8000/blogs/api/';
+  private blogsUrl = 'https://evening-falls-50549.herokuapp.com/blogs/api/';
 
   getBlogs(): Observable<Blog[]> {
   	const url = this.blogsUrl + 'list/';
