@@ -28,7 +28,7 @@ SECRET_KEY = config('PROJECT_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['evening-falls-50549.herokuapp.com']
 
 AUTH_USER_MODEL = 'accounts.User'
 
