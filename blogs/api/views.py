@@ -35,3 +35,12 @@ class BlogListAPIView(generics.ListAPIView):
 				Q(user__username__icontains=query)
 			)
 		return qs
+
+
+class BlogRUDAPIView(generics.RetrieveUpdateDestroyAPIView):
+	serializer_class = BlogModelSerializer
+	permission_classes = (permissions.IsAuthenticated,)
+
+	def get_queryset(self):
+		qs = Blog.objects.filter(owner=self.request.user)
+		return qs
