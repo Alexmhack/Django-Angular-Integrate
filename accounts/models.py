@@ -60,7 +60,7 @@ class User(AbstractBaseUser):
 		unique=True
 	)
 
-	active = models.BooleanField(default=False)
+	active = models.BooleanField(default=True)
 	staff = models.BooleanField(default=False)  # <- admin user, not super user
 	admin = models.BooleanField(default=False)  # <- super user
 
